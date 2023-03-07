@@ -1,43 +1,38 @@
 package EmployeeWage;
 
 public class EmpWage {
-    public static final int IS_PART_TIME = 1;
-    public static final int IS_FULL_TIME = 2;
-    public static final int EMP_RATE_PER_HOUR = 20;
+    public static final int is_part_time = 1;
+    public static final int is_full_time = 2;
 
-    public static final int NUM_OF_WORKING_DAYS = 20;
-    public static final int MAX_HRS_IN_MONTH = 100;
+    public static int computeEmpWage(String company, int EmpRatePerHrs, int numberOfWorkingDays
+            , int maxHrsPerMonth ){
+        int EmpHrs = 0, TotalEmpHrs = 0, TotalWorkingDays = 0;
 
-    public static int computeEmpWage() {
-        int empHrs = 0;
-        int total_working_days = 0;
-        int totalEmpHrs = 0;
+        while (TotalEmpHrs <= maxHrsPerMonth && TotalWorkingDays < numberOfWorkingDays){
 
-        while (totalEmpHrs < MAX_HRS_IN_MONTH &&
-                total_working_days < NUM_OF_WORKING_DAYS){
-            total_working_days++;
-            int empCheck = (int) Math.floor(Math.random() * 10) % 3;
+            TotalWorkingDays++;
 
-            switch (empCheck) {
-
-                case IS_FULL_TIME:
-                    empHrs = 8;
+            int empCheck = (int)Math. floor(Math.random() * 10) % 2;
+            switch (empCheck){
+                case is_part_time:
+                    EmpHrs = 4;
                     break;
-                case IS_PART_TIME:
-                    empHrs = 4;
+                case is_full_time:
+                    EmpHrs = 8;
                     break;
                 default:
-                    empHrs = 0;
+                    EmpHrs = 0;
             }
-            totalEmpHrs +=empHrs;
-            System.out.println( total_working_days +" " + " Emp Hours :"+ empHrs);
+            TotalEmpHrs +=EmpHrs;
+            System.out.println("day "+ TotalWorkingDays+ " employee hrs"+ EmpHrs);
         }
-        int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
-        System.out.println("total emp wage" + totalEmpWage);
-        return totalEmpWage;
+        int TotalEmpWage = TotalEmpHrs * EmpRatePerHrs;
+        System.out.println("total employee wage for company :"+company+ " is :"+TotalEmpWage);
+        return TotalEmpWage;
     }
 
     public static void main(String[] args) {
-        computeEmpWage();
+        computeEmpWage("Mahindra",5,6,40);
+        computeEmpWage("Google",10,5,50);
     }
 }
